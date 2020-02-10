@@ -12,13 +12,7 @@ namespace Union_find_Algorithms
         private int[] size;     // size[i] = number of sites in subtree rooted at i
         private int count;      // number of components
 
-        /// <summary>
-        /// * Initializes an empty union-find data structure with <tt>N</tt> sites
-        /// * <tt>0</tt> through <tt>N-1</tt>. Each site Is initially in its own
-        /// * component.
-        /// </summary>
-        /// <param name="n">the number of sites</param>
-        /// <exception cref="ArgumentOutOfRangeException">if n&lt;0</exception>
+
         public Weighted_Union(int N)
         {
             count = N;
@@ -31,24 +25,7 @@ namespace Union_find_Algorithms
             }
         }
 
-        /// <summary>
-        /// Returns the number of components.
-        /// </summary>
-        /// <returns>the number of components
-        /// (between <tt>1</tt> And <tt>N</tt>)</returns>
-        public int GetCount()
-        {
-            return count;
-        }
-
-        /// <summary>
-        /// Returns the component identifier for the component containing site <tt>p</tt>.
-        /// </summary>
-        /// <param name="p">the integer representing one object</param>
-        /// <returns>the component identifier for the component
-        /// containing site <tt>p</tt></returns>
-        /// <exception cref="IndexOutOfRangeException">unless
-        /// <tt>0 &lt;= p &lt; N</tt></exception>
+        //Find and validate p 
         public int Find(int p)
         {
             Validate(p);
@@ -67,33 +44,23 @@ namespace Union_find_Algorithms
                 ("index " + p + " is not between 0 and " + (N - 1));
             }
         }
-
         /// <summary>
-        /// Returns true if the two sites are in the same component.
+        /// Not every used there.. but allow you to see wheater or not to members are connected. 
         /// </summary>
-        /// <param name="p">the integer representing one site</param>
-        /// <param name="q">the integer representing the other site</param>
-        /// <returns>
-        /// <b>true</b> if the two sites <tt>p</tt>
-        /// And <tt>q</tt> are in the same component;
-        /// <tt>false</tt> otherwise
-        ///</returns>
-        /// <exception cref="IndexOutOfRangeException">unless <tt>0
-        /// &lt;= p &lt; N</tt> And <tt>0 &lt;= q &lt; N</tt></exception>
+        /// <param name="p"></param>
+        /// <param name="q"></param>
+        /// <returns></returns>
         public bool Connected(int p, int q)
         {
             return Find(p) == Find(q);
         }
 
+
         /// <summary>
-        /// Merges the component containing site <tt>p</tt> with the
-        ///     * the component containing site <tt>q</tt>.
+        ///  Make all members of q's, set member of p - based on which union that has the most members
         /// </summary>
-        /// <param name="p">the integer representing one site</param>
-        /// <param name="q">the integer representing the other site</param>
-        /// <exception cref="IndexOutOfRangeException">unless both 
-        /// <tt>0 &lt;= p &lt; N</tt> 
-        /// And <tt>0 &lt;= q &lt; N</tt></exception>
+        /// <param name="p"></param>
+        /// <param name="q"></param>
         public void Union(int p, int q)
         {
             int rootP = Find(p);
@@ -114,18 +81,24 @@ namespace Union_find_Algorithms
             count--;
         }
 
+        /// <summary>
+        /// Give a string that clear show how many member there are in different unions 
+        /// </summary>
+        /// <returns></returns>
         public string UnionSize()
         {
             string result = "";
-
             foreach (var item in size)
             {
                 result += item.ToString();
             }
-
             return result;
         }
 
+        /// <summary>
+        /// Give a string which contains all the array with values 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             String result = "";
